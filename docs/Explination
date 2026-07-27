@@ -1,0 +1,167 @@
+# Conlang Generator Engine — Concepts & Documentation
+
+---
+
+## Phoneme
+
+A **phoneme** is the smallest unit of sound in a language that can distinguish meaning. For example, /p/ and /b/ are different phonemes in English because "pat" and "bat" mean different things.
+
+In this engine, phonemes are represented by two classes: `Consonant` and `Vowel`.
+
+---
+
+## Consonant
+
+A consonant is a speech sound produced by partially or fully obstructing airflow. Every consonant is described by three features:
+
+### Voicing
+Whether the vocal cords vibrate during the sound.
+- `VOICELESS` — no vibration (e.g. /p/, /t/, /k/)
+- `VOICED` — vibration (e.g. /b/, /d/, /g/)
+- Other values: `BREATHY_VOICE`, `CREAKY_VOICE`, `MODAL_VOICE`, etc.
+
+### Place of Articulation
+Where in the mouth the obstruction happens.
+- `BILABIAL` — both lips (e.g. /p/, /b/, /m/)
+- `ALVEOLAR` — tongue on the ridge behind upper teeth (e.g. /t/, /d/, /n/)
+- `PALATAL` — tongue on the hard palate (e.g. /c/, /ɲ/)
+- `VELAR` — tongue on the soft palate (e.g. /k/, /g/, /ŋ/)
+- And many more: `DENTAL`, `RETROFLEX`, `UVULAR`, `GLOTTAL`, etc.
+
+### Manner of Articulation
+How the airflow is obstructed.
+- `PLOSIVE` — complete stop then release (e.g. /p/, /t/, /k/)
+- `NASAL` — air through the nose (e.g. /m/, /n/)
+- `SIBILANT_FRICATIVE` — turbulent airflow through a narrow channel (e.g. /s/, /z/)
+- `APPROXIMANT` — partial constriction (e.g. /w/, /j/)
+- `TRILL` — rapid vibration (e.g. rolled /r/)
+- And many more.
+
+---
+
+## Vowel
+
+A vowel is a speech sound produced with an open vocal tract. Every vowel is described by six features:
+
+- **Voicing** — same as consonants (vowels are almost always `VOICED`)
+- **Height** — how high the tongue is: `CLOSE`, `CLOSE_MID`, `MID`, `OPEN_MID`, `OPEN`, etc.
+- **Backness** — where the tongue is front to back: `FRONT`, `CENTRAL`, `BACK`
+- **Roundness** — whether the lips are rounded: `ROUNDED`, `UNROUNDED`
+- **Nasalization** — whether air passes through the nose: `NASALIZED`, `UNNASALIZED`
+- **Length** — how long the vowel is held: `SHORT`, `LONG`, `OVERLONG`
+
+---
+
+## Phonology
+
+A **phonology** is the complete sound inventory of a language — the full set of consonants and vowels that the language uses.
+
+In this engine, `Phonology` stores:
+- `consonants` — list of `Consonant` objects
+- `vowels` — list of `Vowel` objects
+
+### Key methods:
+- `add_consonant(consonant)` — adds a consonant if not already present
+- `add_vowel(vowel)` — adds a vowel if not already present
+- `remove_consonant(consonant)` — removes a consonant
+- `remove_vowel(vowel)` — removes a vowel
+- `has_consonant(consonant)` — returns True/False
+- `has_vowel(vowel)` — returns True/False
+- `num_consonants()` — count of consonants
+- `num_vowels()` — count of vowels
+
+---
+
+## Syllable Structure
+
+A **syllable** is a unit of sound made up of three parts:
+
+- **Onset** — consonants before the vowel (e.g. the /tr/ in "tree")
+- **Nucleus** — the vowel or vowels at the core (e.g. the /iː/ in "tree")
+- **Coda** — consonants after the vowel (e.g. the /nd/ in "send")
+
+`Syllable_Structure` stores the number of consonants/vowels in each position:
+
+```python
+Syllable_Structure(onset_len, nucleus_len, coda_len)
+Syllable_Structure(2, 1, 1)  # CCVC
+```
+
+### Methods:
+- `human_readable()` — returns pattern as C/V labels: `['C','C','V','C']`
+- `human_readable_arranged()` — returns pattern as O/N/C labels: `['O','O','N','C']`
+- `total_len()` — total number of slots
+
+---
+
+## Phonotactics
+
+**Phonotactics** defines the rules for which sounds are allowed in which positions within a syllable. Not every sound in a language's inventory can appear everywhere.
+
+For example, in English:
+- /ŋ/ (as in "sing") can appear in the coda but never in the onset
+- /h/ can appear in the onset but never in the coda
+
+### Phonotactic Slot
+
+A `Phonotactic_Slot` represents a single position in a syllable. It holds:
+- `index` — its position number (0, 1, 2...)
+- `slot_type` — what kind of position it is (`'O'` for onset, `'N'` for nucleus, `'C'` for coda)
+- `valid` — the list of phonemes allowed in this position
+
+### Phonotactics class
+
+`Phonotactics` takes a `Syllable_Structure` and a `Phonology` and builds a slot for each position:
+
+```python
+Ph = Phonotactics(syllable_structure, phonology)
+```
+
+For a `Syllable_Structure(2, 1, 1)` this creates 4 slots:
+```
+Slot 0 — type: O — valid: []
+Slot 1 — type: O — valid: []
+Slot 2 — type: N — valid: []
+Slot 3 — type: C — valid: []
+```
+
+### Key methods:
+- `add_to_slot(index, phoneme)` — adds a phoneme to a slot's valid list. Only works if the phoneme exists in the phonology.
+- `remove_from_slot(index, phoneme)` — removes a phoneme from a slot's valid list.
+
+---
+
+## File Structure
+
+```
+engine/
+  phoneme/
+    features.py         — all shared enums (Voicing, PlaceSpecific, Manner, Height, etc.)
+    consonant.py        — Consonant class
+    vowel.py            — Vowel class
+  phonology/
+    phonology.py        — Phonology class
+  syllable_structure/
+    syllable_structure.py — Syllable_Structure class
+  phonotactics/
+    phonotactics.py     — Phonotactic_Slot and Phonotactics classes
+```
+
+---
+
+## Roadmap
+
+### Done
+- `Consonant` and `Vowel` classes with feature enums
+- `Phonology` class — inventory management
+- `Syllable_Structure` class — syllable shape
+- `Phonotactics` class — per-slot phoneme constraints
+
+### Next
+- `Syllable` — an actual syllable instance filled with real phonemes
+- `SyllableGenerator` — generates syllables from a phonology + phonotactics
+- `Word` — a sequence of syllables
+- `Lexicon` — a collection of words
+- Sound change engine
+- Phoneme registry with frequency data (PHOIBLE)
+- C++ UI layer

@@ -1,0 +1,132 @@
+##############################Consonants##############################
+
+Voicing
+
+Voiceless               :   VCLS
+Breathy Voice           :   BRVC
+Slack Voice             :   SLVC
+Modal Voice             :   MDVC
+Voiced                  :   VCED
+Stiff Voice             :   STVC
+Creaky Voice            :   CRVC
+Glottal Closure         :   GLCL
+
+
+
+Manner of Articluation
+
+Nasal                   :   NSAL
+Plosive                 :   PLSV
+Sibilant Fricative      :   SBFR
+Non-Sibilant Fricative  :   NSFR
+    Lateral Fricative       :   LAFR
+    Approximant             :   APPR
+Lateral Approximant     :   LAPR
+Tap/Flap                :   TPFL
+Trill                   :   TRLL
+Lateral Tap/Flap        :   LTPF
+
+Implosive               :   IMPL
+Ejective                :   EJTV
+Click                   :   CLCK
+
+Affricate               :   AFFR
+Sibilant Affricate      :   SBAF
+Non-Sibilant Affricate  :   NSAF
+Lateral Affricate       :   LAAF
+Ejective Affricate      :   EJAF
+Lateral Ejective AFF.   :   LEAF
+
+
+Place of Articluation
+
+Labial                  :   LABL
+Bilabial                :   BLBL
+Labio-Dental            :   LBDN
+Linguo-Labial           :   LGLB
+
+Coronal                 :   CRNL
+Dental:                 :   DNTL
+Alveolar                :   ALVR
+Post-Alveolar           :   PALV
+Retro-Flex              :   RTFL
+Alveolo-Palatal         :   ALPL
+
+Dorsal                  :   DRSL
+Palatal                 :   PLTL
+Velar                   :   VELR
+Uvular                  :   UVLR
+
+Laryngeal               :   LRGL
+Pharayngeal             :   PHGL
+Epiglottal              :   EPGL
+Glottal                 :   GLTL
+
+
+Secondary Phonetic Character
+
+Syllabic                :   SYLB
+Non-Syllabic            :   NSLB
+Aspirated               :   ASPR
+No Audible Release      :   NARL
+Nasal Release           :   NSRL
+Lateral Release         :   LARL
+Voiceless dental fricative release : VDFR
+Voiceless velar fricative release  : VVFR
+Mid central vowel release:  MCVR
+Apical                  :   APCL
+Laminal                 :   LMNL
+Advanced                :   ADVD
+Retracted               :   RTCD
+Centralized             :   CNLD
+Mid-Centralized         :   MDCN
+Raised                  :   RSED
+Lowered                 :   LWRD
+Rounded                 :   RNDD
+Un Rounded              :   UNRN
+Labialized              :   LBLZ
+Palatalized             :   PLTZ
+Velarized               :   VLRZ
+Pharyngealized          :   PHLZ
+Advanced Tongue Root    :   ATRT
+Retracted Toung  Root   :   RTRT
+Nazalized               :   NZLD
+Rhoticity               :   RHTY
+
+
+
+##############################Vowels##############################
+
+Height
+
+Close                   :   CLSE
+Near Close              :   NRCL
+Close Mid               :   CLMD
+Mid (Middle)            :   MIDE
+Open Mid                :   OPMD
+Near Open               :   NROP
+Open                    :   OPEN
+
+
+Backness
+
+Front                   :   FRNT
+Centeral                :   CNTR
+Back                    :   BACK
+
+
+Roundness
+
+Rounded                 :   RNDD
+Un Rounded              :   UNRR
+
+Nazalization
+
+Nazalized               :   NZLD
+Un Nasalized            :   UNNZ
+
+Length:
+
+Short                   :   SHRT
+Long                    :   LONG
+Overlong                :   OVLG

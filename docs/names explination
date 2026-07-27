@@ -1,0 +1,5 @@
+consonant   : name of the file containing the type Consonant
+consonants  : name of the attribute in phonology
+Consonant   : data type Consonant in file consonant
+
+simmilarly, we have vowels
