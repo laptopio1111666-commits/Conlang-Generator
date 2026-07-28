@@ -10,4 +10,8 @@ class ipa_vowel:
         self.nasalization = nasalization
         self.length = length
 
-    
+class ipa_consonant:
+    def __init__(self,voicing,manner,place):
+        self.place = place
+        self.manner = manner
+        self.voicing = voicing
